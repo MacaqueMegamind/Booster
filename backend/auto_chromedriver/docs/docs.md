@@ -38,4 +38,12 @@ driver.quit()
 ### Result
 ![auto_chromedriver](./img/auto_result.jpg)
 
+## Installing
+```bash
+cd ./auto_chromedriver
+pip install -r requirements.txt
+```
+
+
+
 
