@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
 import time
 
-from data.xpath_config import XPATHLoginEmail, XPATHLoginPhone
+from data.xpath_config import XPATHLoginEmail, XPATHLogin
 
 
 class Login:
@@ -37,18 +37,19 @@ class Login:
         :param number_phone: number phone
         :return:
         """
-        self.driver.get(XPATHLoginPhone.StartPage)
-        WebDriverWait(self.driver, 20).until(ec.visibility_of_element_located((By.XPATH, XPATHLoginPhone.AUTH_FORM)))
-        self.driver.find_element(By.XPATH, XPATHLoginPhone.INPUT_FORM).send_keys(number_phone)
-        auth = self.driver.find_element(By.XPATH, XPATHLoginPhone.AUTH_FORM)
-        auth.find_element(By.XPATH, XPATHLoginEmail.SIGN_IN_BUTTON).click()
+        self.driver.get(XPATHLogin.StartPage)
+        WebDriverWait(self.driver, 20).until(ec.visibility_of_element_located((By.XPATH, XPATHLogin.AUTH_FORM)))
+        self.driver.find_element(By.XPATH, XPATHLogin.INPUT_FORM).send_keys(number_phone)
+        auth = self.driver.find_element(By.XPATH, XPATHLogin.AUTH_FORM)
+        auth.find_element(By.XPATH, XPATHLogin.SIGN_IN_BUTTON).click()
         time.sleep(self.time_delay)
         # здесь заменим потом int(input()) на получение кода с телефона
-        self.driver.find_element(By.XPATH, XPATHLoginEmail.INPUT_CODE_FORM).send_keys(int(input()))
+        self.driver.find_element(By.XPATH, XPATHLogin.INPUT_CODE_FORM).send_keys(int(input()))
 
         if input():
             self.driver.quit()
 
-# test = Login(time_delay=3)
-# test.login_by_phone(number_phone="9009295422")
-# test.login_by_email(email="zazc256@gmail.com")
+
+test = Login(time_delay=3)
+# test.login_by_phone(number_phone="9204669750")
+test.login_by_email(email="zazc256@gmail.com")
