@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
 import time
 
-from data.xpath_config import XPATHLoginEmail, XPATHLogin
+from data.xpath_config import XPATHLoginEmail, XPATHLogin, XPATHRegistration
 
 
 class Login:
@@ -49,7 +49,26 @@ class Login:
         if input():
             self.driver.quit()
 
+    def add_email(self, email: str):
+        """
+        Add email
+        :param email: email
+        :return:
+        """
+        self.driver.get(XPATHLogin.StartPage)
+        time.sleep(self.time_delay)
+        self.driver.find_element(By.XPATH, XPATHLogin.ADD_EMAIL_BUTTON).click()
+        time.sleep(self.time_delay)
+        self.driver.find_element(By.XPATH, XPATHLogin.ADD_EMAIL_FORM).send_keys(email)
+        time.sleep(self.time_delay)
+        self.driver.find_element(By.XPATH, XPATHLogin.GET_CODE_BY_EMAIL_BUTTON).click()
+        time.sleep(self.time_delay)
+        self.driver.find_element(By.XPATH, XPATHLogin.INPUT_CODE_FORM_BY_EMAIL).send_keys(int(input()))
+
+        if input():
+            self.driver.quit()
+
 
 test = Login(time_delay=3)
-# test.login_by_phone(number_phone="9204669750")
-test.login_by_email(email="zazc256@gmail.com")
+test.login_by_phone(number_phone="9507592860")
+test.add_email(email="vanekforest@yandex.ru")
