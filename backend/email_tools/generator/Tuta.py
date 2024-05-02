@@ -65,9 +65,6 @@ class Tuta:
         for i in range(1, 17):
             recovery_code += recovery_element.find_element(By.XPATH, f"span[{i}]").text
 
-        print(f"Login: {login}")
-        print(f"Password: {password}")
-        print(f"Recovery code: {recovery_code}")
 
         time.sleep(self.time_delay)
 
@@ -86,4 +83,5 @@ class Tuta:
 
 
 if __name__ == '__main__':
-    Tuta().generate_account()
+    account = Tuta().generate_account()
+    print(account)

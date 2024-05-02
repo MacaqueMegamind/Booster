@@ -11,6 +11,3 @@ def generate_password(length=16):
     all_characters = string.ascii_letters + string.digits + string.punctuation
     password = ''.join(secrets.choice(all_characters) for i in range(length))
     return password
-
-print(generate_login())
-print(generate_password())

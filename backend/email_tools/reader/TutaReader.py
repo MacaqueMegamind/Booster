@@ -31,7 +31,8 @@ class TutaReader:
         WebDriverWait(self.driver, 2).until(EC.element_to_be_clickable((By.XPATH, XPATH_VerifyMessage.OK_BUTTON)))
         self.driver.find_element(By.XPATH, XPATH_VerifyMessage.OK_BUTTON).click()
 
-    def get_list_of_messages(self):
+    def get_list_of_messages(self) -> list[tuple[str, str]]:
+        messages: list[tuple[str, str]] = []
         WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located((By.XPATH, XPATH_MessageList.MESSAGES_LIST)))
         number_of_messages = len(self.driver.find_elements(By.XPATH, XPATH_MessageList.MESSAGE))
@@ -42,8 +43,8 @@ class TutaReader:
                                                     XPATH_MESSAGE_WITH_INDEX+XPATH_MessageList.MESSAGE_FROM).text
             message_subject = self.driver.find_element(By.XPATH,
                                                        XPATH_MESSAGE_WITH_INDEX+XPATH_MessageList.MESSAGE_SUBJECT).text
-            print(f"From: {message_from}\nSubject: {message_subject}\n\n")
-            print(XPATH_MESSAGE_WITH_INDEX)
+            messages.append((message_from, message_subject))
+        return messages
 
     def get_message(self, index: int):
         WebDriverWait(self.driver, 10).until(
@@ -80,7 +81,11 @@ if __name__ == "__main__":
     except:
         pass
 
-    reader.get_message(1)
+    messages = reader.get_list_of_messages()
+    for message in messages:
+        print(message)
+    message1 = reader.get_message(1)
+    print(message1)
 
     if input():
         reader.quit()
