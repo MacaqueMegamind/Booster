@@ -35,3 +35,34 @@ class Email_State:
     EMAIL_AVAILABLE = 'Email address is available.'
     EMAIL_TAKEN = 'Email address is not available.'
     EMAIL_VALIDATING = 'Validating email address...'
+
+
+class XPATH_Login:
+    """
+    Link to login form:
+    https://app.tuta.com/login
+    """
+    StartPage = "https://app.tuta.com/login"
+    EMAIL_INPUT = "//input[@type='email']"
+    PASSWORD_INPUT = "//input[@type='password']"
+    LOG_IN_BUTTON = "//button[@aria-label='Log in']"
+
+
+class XPATH_VerifyMessage:
+    DIALOG = "//div[@role='dialog']"
+    OK_BUTTON = "//div[@role='dialog']/descendant::button[@aria-label='Ok']"
+
+
+class XPATH_MessageList:
+    MESSAGES_LIST = "//ul[contains(@class, 'list')]"
+    MESSAGE = "//li[@class='list-row' and not(contains(@style, 'display: none'))]"
+    MESSAGE_FROM = "/descendant::div[contains(@class, 'badge-line-height')]/div[contains(@class, 'text-ellipsis')]"
+    MESSAGE_SUBJECT = "/descendant::div[contains(@class, 'badge-line-height')]/following-sibling::div/div[contains(@class, 'text-ellipsis')]"
+
+class XPATH_Message:
+    MESSAGE = "//div[@id='mail-body']"
+    MAIL_VIEWER = "//div[contains(@class, 'mail-viewer')]"
+    MESSAGE_BODY = "/descendant::div[contains(@name, 'messageReplySection')]"
+
+
+
