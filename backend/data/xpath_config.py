@@ -44,3 +44,7 @@ class XPATHRegistration:
     ADVERTISEMENT_BUTTON = "//input[@name='advertising']/ancestor::label[1]"
     INPUT_CODE_FORM = "//input[@name='otp']"
     REGISTRATION_BUTTON = "//button[@type='submit']"
+    ADD_EMAIL_BUTTON = "//span[contains(text(), 'Почта')]/following::button[1]"
+    ADD_EMAIL_FORM = "//input[@inputmode='email']"
+    GET_CODE_BY_EMAIL_BUTTON = "//div[contains(text(), 'Получить')]/ancestor::button[1]"
+

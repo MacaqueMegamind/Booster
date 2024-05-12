@@ -33,6 +33,19 @@ class Registration:
         if input():
             self.driver.quit()
 
+    def add_email(self, email: str):
+        """
+        Add email
+        :param email: email
+        :return:
+        """
+        self.driver.get(XPATHRegistration.StartPage)
+        time.sleep(self.time_delay)
+        self.driver.find_element(By.XPATH, XPATHRegistration.ADD_EMAIL_BUTTON).click()
 
-test = Registration(time_delay=3)
-test.registration_by_phone(number_phone="9507592860")
+        if input():
+            self.driver.quit()
+
+
+test = Registration(time_delay=50)
+test.add_email(email="zazc256@gmail.com")
