@@ -21,6 +21,10 @@ class XPATHLogin:
     INPUT_FORM = "//input[@name='autocomplete']"
     SIGN_IN_BUTTON = "//button[@type='submit']"
     INPUT_CODE_FORM = "//input[@name='otp']"
+    ADD_EMAIL_BUTTON = "//span[contains(text(), 'Почта')]/following::button[1]"
+    ADD_EMAIL_FORM = "//input[@inputmode='email']"
+    GET_CODE_BY_EMAIL_BUTTON = "//div[contains(text(), 'Получить')]/ancestor::button[1]"
+    INPUT_CODE_FORM_BY_EMAIL = "//input[@type='number']"
 
 
 class XPATHAddProduct:
@@ -47,4 +51,4 @@ class XPATHRegistration:
     ADD_EMAIL_BUTTON = "//span[contains(text(), 'Почта')]/following::button[1]"
     ADD_EMAIL_FORM = "//input[@inputmode='email']"
     GET_CODE_BY_EMAIL_BUTTON = "//div[contains(text(), 'Получить')]/ancestor::button[1]"
-
+    INPUT_CODE_FORM_BY_EMAIL = "//input[@type='number']"
