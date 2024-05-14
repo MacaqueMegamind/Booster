@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
 import time
 
+from backend.online_sim.number import Number
 from data.xpath_config import XPATHRegistration
 
 
@@ -12,22 +13,27 @@ class Registration:
         self.driver = Driver()
         self.time_delay = time_delay
 
-    def registration_by_phone(self, number_phone: str):
+    def registration_by_phone(self, number: Number):
         """
         Registration by number phone and input code
-        :param number_phone: number phone
+        :param number: Number object
         :return:
         """
         self.driver.get(XPATHRegistration.StartPage)
         WebDriverWait(self.driver, 20).until(ec.visibility_of_element_located((By.XPATH, XPATHRegistration.AUTH_FORM)))
-        self.driver.find_element(By.XPATH, XPATHRegistration.INPUT_FORM).send_keys(number_phone)
+        WebDriverWait(self.driver, 20).until(ec.visibility_of_element_located((By.XPATH, XPATHRegistration.AUTH_FORM)))
+        self.driver.find_element(By.XPATH, XPATHRegistration.INPUT_FORM).send_keys(number.get_number())
         auth = self.driver.find_element(By.XPATH, XPATHRegistration.AUTH_FORM)
         auth.find_element(By.XPATH, XPATHRegistration.SIGN_IN_BUTTON).click()
         time.sleep(self.time_delay)
         auth.find_element(By.XPATH, XPATHRegistration.ADVERTISEMENT_BUTTON).click()
         auth.find_element(By.XPATH, XPATHRegistration.AGREEMENT_BUTTON).click()
-        # здесь заменим потом int(input()) на получение кода с телефона
-        self.driver.find_element(By.XPATH, XPATHRegistration.INPUT_CODE_FORM).send_keys(int(input()))
+        WebDriverWait(self.driver, 70).until(
+            ec.visibility_of_element_located((By.XPATH, XPATHRegistration.INPUT_CODE_FORM_BY_PHONE)))
+        self.driver.find_element(By.XPATH, XPATHRegistration.INPUT_CODE_FORM_BY_PHONE).click()
+        code = number.get_code()
+        print(code)
+        self.driver.find_element(By.XPATH, XPATHRegistration.INPUT_CODE_FORM).send_keys(code)
         auth.find_element(By.XPATH, XPATHRegistration.REGISTRATION_BUTTON).click()
 
         if input():
@@ -54,5 +60,6 @@ class Registration:
 
 
 test = Registration(time_delay=3)
-test.registration_by_phone("9507592860")
-test.add_email(email="vanekforest@yandex.ru")
+num = Number()
+test.registration_by_phone(number=num)
+# test.add_email(email="vanekforest@yandex.ru")

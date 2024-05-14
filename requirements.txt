@@ -3,3 +3,4 @@ undetected-chromedriver == 3.5.5
 setuptools == 69.2.0
 selenium == 4.19.0
 sqlalchemy == 2.0.30
+onlinesimru == 2.0.4

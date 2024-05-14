@@ -52,3 +52,4 @@ class XPATHRegistration:
     ADD_EMAIL_FORM = "//input[@inputmode='email']"
     GET_CODE_BY_EMAIL_BUTTON = "//div[contains(text(), 'Получить')]/ancestor::button[1]"
     INPUT_CODE_FORM_BY_EMAIL = "//input[@type='number']"
+    INPUT_CODE_FORM_BY_PHONE = "//a[contains(text(), 'Запросить СМС-код')]"
