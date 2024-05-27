@@ -63,6 +63,6 @@ class XPATH_Message:
     MESSAGE = "//div[@id='mail-body']"
     MAIL_VIEWER = "//div[contains(@class, 'mail-viewer')]"
     MESSAGE_BODY = "/descendant::div[contains(@name, 'messageReplySection')]"
-
+    MAIL = "//div[@class='drag selectable touch-callout break-word-links']"
 
 

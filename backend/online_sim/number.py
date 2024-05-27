@@ -1,6 +1,6 @@
 from onlinesimru import FreeNumbersService, RentNumbersService, ProxyService, UserService, NumbersService
 
-from backend.data.config import KEY_SIM_API
+from data.config import KEY_SIM_API
 
 
 class Number:

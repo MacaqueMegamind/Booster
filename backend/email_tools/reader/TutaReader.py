@@ -8,12 +8,14 @@ import time
 
 
 class TutaReader:
-    def __init__(self, email: str, password: str, time_delay: int = 1):
+    def __init__(self, email: str, password: str, time_delay: int = 1, proxy: str = None):
         self.email = email
         self.password = password
         options = ChromeOptions()
         options.add_argument("--lang=en")
-        self.driver = Driver(options=options)
+        if proxy:
+            options.add_argument("--proxy-server=%s" % proxy)
+        self.driver = Driver(options = options)
         self.time_delay = time_delay
 
     def login(self):
@@ -40,9 +42,9 @@ class TutaReader:
             XPATH_MESSAGE_WITH_INDEX = XPATH_MessageList.MESSAGE + f"[{index}]"
             message = self.driver.find_element(By.XPATH, XPATH_MESSAGE_WITH_INDEX)
             message_from = self.driver.find_element(By.XPATH,
-                                                    XPATH_MESSAGE_WITH_INDEX+XPATH_MessageList.MESSAGE_FROM).text
+                                                    XPATH_MESSAGE_WITH_INDEX + XPATH_MessageList.MESSAGE_FROM).text
             message_subject = self.driver.find_element(By.XPATH,
-                                                       XPATH_MESSAGE_WITH_INDEX+XPATH_MessageList.MESSAGE_SUBJECT).text
+                                                       XPATH_MESSAGE_WITH_INDEX + XPATH_MessageList.MESSAGE_SUBJECT).text
             messages.append((message_from, message_subject))
         return messages
 
@@ -64,16 +66,19 @@ class TutaReader:
             EC.visibility_of_element_located((By.XPATH, XPATH_Message.MESSAGE)))
 
         shadow_root = self.driver.find_element(By.XPATH, XPATH_Message.MESSAGE).shadow_root
-        mail = shadow_root.find_element(By.NAME, "messageReplySection")
+        mail = shadow_root.find_element(By.CLASS_NAME, "messageReplySection")
 
         return message_from, message_subject, mail.text
+
+    def get_last_message(self):
+        return self.get_message(1)
 
     def quit(self):
         self.driver.quit()
 
 
 if __name__ == "__main__":
-    reader = TutaReader("huilockashut@tutamail.com", "dank1kong")
+    reader = TutaReader("huilockasosisochka@tutamail.com", "ALAT1375BY")
     reader.login()
 
     try:
@@ -86,6 +91,11 @@ if __name__ == "__main__":
         print(message)
     message1 = reader.get_message(1)
     print(message1)
+
+    print("\nCODE")
+    from email_tools.wrapper.codes import get_code
+    print(get_code(reader.get_last_message()[2]))
+
 
     if input():
         reader.quit()
