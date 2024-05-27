@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
 import time
 
-from data.xpath_config import XPATHLoginEmail, XPATHLogin, XPATHRegistration
+from data.xpath_config import XPATHLoginEmail, XPATHLogin
 
 
 class Login:
